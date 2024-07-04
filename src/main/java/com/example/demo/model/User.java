@@ -8,6 +8,7 @@ import java.util.Set;
 @Data
 //lombok
 //tu tao getter/setter/constructor
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

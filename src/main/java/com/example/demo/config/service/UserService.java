@@ -20,4 +20,8 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         return UserPrinciple.build(userRepository.findByUsername(username));
     }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
 }

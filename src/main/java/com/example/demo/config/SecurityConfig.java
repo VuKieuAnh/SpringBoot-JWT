@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -60,6 +61,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userService);
+//        authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
@@ -72,6 +74,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                         .requestMatchers("/api/auth/login**").permitAll()
+                        .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/role").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/customers**").authenticated()
 //                        .requestMatchers("/api/customers**").hasAnyAuthority("ROLE_ADMIN")
