@@ -54,12 +54,15 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+//        encoderPassword
         String pw = passwordEncoder.encode(user.getPassword());
         user.setPassword(pw);
+//        set Roles mac dinh
         Set<Role> roles = new HashSet<>();
         Role role = roleService.findByName(RoleName.ROLE_USER.toString());
         roles.add(role);
         user.setRoles(roles);
+//        luu lai vao db
         userService.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -61,8 +61,8 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userService);
-//        authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
 
@@ -73,8 +73,9 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                        .requestMatchers("/api/auth/login**").permitAll()
+//                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/api/auth/register").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/role").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/customers**").authenticated()
 //                        .requestMatchers("/api/customers**").hasAnyAuthority("ROLE_ADMIN")

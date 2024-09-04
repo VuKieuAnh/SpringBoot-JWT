@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Customer;
+import com.example.demo.model.RoleName;
 import com.example.demo.repo.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
